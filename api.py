@@ -25,7 +25,7 @@ class AlumnoBase(BaseModel):
 def hola_mundo():
     print("Invocando a ruta /")
     respuesta = {
-        "mensaje": "¡Hola mundo!"
+        "mensaje": "¡Hola Profesora, Esta es mi practica REST!"
     }
     return respuesta
 

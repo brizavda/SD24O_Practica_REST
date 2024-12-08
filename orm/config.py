@@ -11,7 +11,10 @@ from sqlalchemy.ext.declarative import declarative_base
 URL_BASE_DATOS = "postgresql://SistemasD:Nomelos3@localhost:5432/PracticaREST"
 
 # Crear el motor de conexión
-engine = create_engine(URL_BASE_DATOS)
+engine = create_engine(URL_BASE_DATOS,
+                        connect_args={
+                            "options":"-csearch_path=app"
+                        })
 
 # 2. Obtener la clase que nos permite crear objetos tipo sesión
 SessionClass = sessionmaker(engine)
