@@ -1,24 +1,12 @@
 from fastapi import FastAPI, UploadFile, File, Form, Depends
 from typing import Optional
 from pydantic import BaseModel
-import shutil
-import os
-import uuid
 import orm.repo as repo  # Para hacer consultas a la BD
 from sqlalchemy.orm import Session
 from orm.config import generador_session  # Generador de sesiones
 
 # Creación del servidor
 app = FastAPI()
-
-# Clase base para alumno
-class AlumnoBase(BaseModel):
-    nombre: Optional[str] = None
-    edad: int
-    domicilio: str
-    carrera: str
-    trimestre: str
-    email: str
 
 # Ruta base
 @app.get("/")
@@ -48,6 +36,11 @@ def borrar_alumno(id: int, sesion: Session = Depends(generador_session)):
 
 # ---------- Consultas a Calificaciones ----------
 
+@app.get("/calificaciones")
+def lista_calificaciones(sesion: Session = Depends(generador_session)):
+    print("API consultando todas las calificaciones")
+    return repo.lista_calificaciones(sesion)
+
 @app.get("/calificaciones/{id}")
 def calificacion_por_id(id: int, sesion: Session = Depends(generador_session)):
     print(f"API consultando calificación con id: {id}")
@@ -69,6 +62,11 @@ def borrar_calificaciones_por_alumno(id: int, sesion: Session = Depends(generado
     return repo.borra_calificaciones_por_id_alumno(sesion, id)
 
 # ---------- Consultas a Fotos ----------
+
+@app.get("/fotos")
+def lista_fotos(sesion: Session = Depends(generador_session)):
+    print("API consultando todas las fotos")
+    return repo.lista_fotos(sesion)
 
 @app.get("/fotos/{id}")
 def foto_por_id(id: int, sesion: Session = Depends(generador_session)):
