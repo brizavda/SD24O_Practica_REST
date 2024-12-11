@@ -110,3 +110,16 @@ def borra_fotos_por_id_alumno(sesion: Session, id_alumno: int):
         "mensaje": "Fotos eliminadas"
     }
     return respuesta
+
+# DELETE FROM fotos WHERE id = id_foto
+# DELETE '/fotos/{id}'
+def borra_foto_por_id(sesion: Session, id_foto: int):
+    print("# delete from fotos where id = ", id_foto)
+    foto = foto_por_id(sesion, id_foto)
+    if foto is not None:
+        sesion.delete(foto)
+        sesion.commit()
+    respuesta = {
+        "mensaje": "Foto eliminada"
+    }
+    return respuesta
