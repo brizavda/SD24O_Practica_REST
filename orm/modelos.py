@@ -30,4 +30,4 @@ class Foto(BaseClass):
     id_alumno = Column(Integer, ForeignKey("alumnos.id"))
     titulo = Column(String(100))
     descripcion = Column(String(100))
-    ruta = Column(String)
+    ruta = Column(String(255))
